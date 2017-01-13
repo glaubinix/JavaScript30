@@ -104,28 +104,15 @@
   </div>
 
 <script>
-  let isPressed = false;
   let lastElement = null;
-
-  const keyDown = function (e) {
-      if (e.keyCode !== 16) return;
-      isPressed = true;
-  };
-  const keyUp = function (e) {
-      if (e.keyCode !== 16) return;
-      isPressed = false;
-  };
-  document.addEventListener('keydown', keyDown);
-  document.addEventListener('keyup', keyUp);
-
 
   const checkboxes = document.querySelectorAll('input[type=checkbox]');
 
-  const click = function () {
+  const click = function (e) {
       if (this === lastElement) return;
 
-      if (isPressed && lastElement) {
-          let doCheck = false
+      if (e.shiftKey && lastElement && this.checked) {
+          let doCheck = false;
           checkboxes.forEach(checkbox => {
               if (checkbox === this || checkbox === lastElement) {
                   doCheck = !doCheck;
